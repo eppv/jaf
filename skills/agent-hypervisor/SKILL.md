@@ -22,6 +22,26 @@ code is written by agents and reviewed by the owner at cycle boundaries.
 What it is not: a parallel agent swarm, a merge-conflict resolver, or a
 replacement for your own judgement about the plan.
 
+## Installation
+
+This skill is more than `SKILL.md`: it ships a dispatcher (`scripts/`), prompt and
+artifact templates, a toy project and tests. Install the **whole directory**.
+
+- **From the repository (the only supported way).** Clone and copy, or symlink:
+
+```
+git clone --branch <branch> https://github.com/eppv/jaf.git /tmp/jaf
+cp -r /tmp/jaf/skills/agent-hypervisor <skills-dir>/<category>/
+```
+
+- **From a raw `SKILL.md` URL — does not work here.** `hermes skills install
+  <raw url>` stores only the files it happens to scan; the dispatcher then fails
+  because `scripts/hvlib/` and `templates/` are missing. If you installed that
+  way, remove it and install from the tree.
+
+Updates: re-clone and copy over. The repository tree is the single source of
+truth — do not edit the installed copy, or the two drift silently.
+
 ## When to Use
 
 - The owner asks to develop a project with agent subcontractors and a
@@ -75,7 +95,7 @@ checkout, and git excludes — it does not commit the owner's work.
 hv status [--json]           where we are, what is blocked, what waits
 hv plan                      increments, criteria versions, pins
 hv run [--until blocked|cycle|accept|done] [--max-cycles N]
-hv report [cycle]            fixed-shape cycle report (Russian, for the owner)
+hv report [cycle]            fixed-shape cycle report
 hv gate [--cold]             deterministic gates
 hv spawn <architect|enabling|dev|qa>
 hv decide --kind ... --text "..."     append a decision to DECISIONS.md
@@ -167,9 +187,9 @@ inside each worktree (read-only copy of the spec branch).
 - `hv run --until cycle` on the toy project in `tests/` closes a cycle: tag
   `cycle-NN-accepted` exists, `main` has code and reports but no `PLAN.md` or
   `env/`, and `hv gate` in the project root is green.
-- `python3 -m unittest discover -s tests` in this skill passes (38 tests:
+- `python3 -m unittest discover -s tests` in this skill passes (39 tests:
   plan hashing, schema validation, gate parsing, container mounts, full cycles,
-  crash/timeout/fuse paths, decision flow, bundle transfer).
+  crash/timeout/fuse paths, decision flow, bundle transfer, spec skeleton).
 
 ## References
 
