@@ -1,0 +1,12 @@
+
+# editors
+.idea/
+.vscode/
+
+# env
+*.env
+.env.*
+.venv/
+
+# data
+*.csv
