@@ -1,0 +1,6 @@
+#!/bin/sh
+# Convenience wrapper: run the dispatcher without remembering the path.
+# Usage: hv status | hv run --until blocked | ...
+set -eu
+here=$(cd "$(dirname "$0")/.." && pwd)
+exec python3 "$here/scripts/hv.py" "$@"
