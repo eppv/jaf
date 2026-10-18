@@ -1,0 +1,36 @@
+# hv.toml - the project's contract with the hypervisor.
+# adapter.cmd is required: the dispatcher has no default executor.
+# Placeholders available in cmd: prompt_file, workdir, usage_file, role,
+# cycle, attempt, project, skill_root -- each written in single braces.
+# See references/protocol.md, section 12, for proven command lines.
+
+[project]
+name = "{{name}}"
+main = "main"
+spec_branch = "spec"
+
+[gates]
+# An empty string means "this gate does not exist here" (shown as an em dash).
+setup = "make setup"
+build = "make build"
+test = "make test"
+lint = "make lint"
+timeout = 1800
+
+[adapter]
+cmd = "{{adapter_cmd}}"
+timeout = 3600
+
+[limits]
+dev_rejections = 2
+qa_rejections = 2
+env_attempts = 2
+total_rejections = 6
+crashes = 1
+
+[isolation]
+mode = "{{isolation}}"
+image = "python:3.12-slim"
+network = "none"
+cpus = 2
+memory = "4g"
