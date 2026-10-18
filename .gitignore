@@ -10,3 +10,7 @@
 
 # data
 *.csv
+
+# python
+__pycache__/
+*.pyc
